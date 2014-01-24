@@ -41,7 +41,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		$email = trim(htmlentities($_POST['email']));
 		$subscribe = htmlentities($_POST['subscribe']);
 		// Initiate FPDI
-		$pdf =& new FPDI();
+		$pdf = new FPDI();
 		// add a page 
 		$pdf->AddPage(); 
 		// set the sourcefile 
