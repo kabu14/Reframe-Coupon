@@ -6,9 +6,29 @@ class Admins {
 		$this->db = $database;
 	}
 
+	public function admin_exists($username)
+	{
+		$query = $this->db->prepare("SELECT 'COUNT(id)' FROM admins WHERE username = ?");
+		$query->bindValue(1,$username);
+
+		try {
+			$query->execute();
+			$result = $query->fetchColumn();
+
+			if ( $result ) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (PDOException $e) {
+			die($e->getMessage());
+		}
+	}
+
 	public function login($username, $password)
 	{
-		$query = $this->db->query("SELECT password, id FROM admins WHERE username = ?");
+		$query = $this->db->prepare("SELECT password, id FROM admins WHERE username = ?");
 		$query->bindValue(1, $username);
 
 		try {
