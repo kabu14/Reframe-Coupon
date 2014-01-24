@@ -37,3 +37,11 @@ ul li{
 .main li, label {
 	display: block;
 }
+
+.error {
+	color: red;
+}
+
+.success {
+	color: green;
+}
