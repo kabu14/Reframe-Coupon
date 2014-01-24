@@ -20,7 +20,29 @@ $general->logged_out_protect();
 	</div>
 
 	<div class="main">
-		<p>Logged in!</p>
+		<?php
+			$results = $admins->gather('users');
+		?>
+		<table border="1">
+			<tr>
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Email</td>
+				<td>Code</td>
+				<td>Subscribe (1 = yes)</td>
+			</tr>
+			<?php
+				foreach ($results as $result) {
+					echo "<tr>";
+					echo "<td>{$result['name']}</td>";
+					echo "<td>{$result['last']}</td>";
+					echo "<td>{$result['email']}</td>";
+					echo "<td>{$result['code']}</td>";
+					echo "<td>{$result['subscribe']}</td>";
+				echo "</tr>";
+			}
+			?>
+		</table>
 	</div>
 </body>
 </html>
