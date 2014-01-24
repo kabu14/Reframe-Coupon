@@ -9,6 +9,10 @@ class General {
 		return (isset($_SESSION['id'])) ? true : false;
 	}
 
+	/**
+	 * Redirects a user to index.php if they aren't logged in
+	 * 
+	 */
 	public function logged_out_protect()
 	{
 		if ( $this->logged_in() === false ) {

@@ -33,3 +33,7 @@ ul li{
 	background: #eee;
 	margin: 0 auto;
 }
+
+.main li, label {
+	display: block;
+}
