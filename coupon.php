@@ -39,7 +39,28 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 		$name = trim(htmlentities($_POST['name']));
 		$last = trim(htmlentities($_POST['last']));
 		$email = trim(htmlentities($_POST['email']));
-		$users->add($name, $last, $email);
+		$subscribe = htmlentities($_POST['subscribe']);
+		// Initiate FPDI
+		$pdf =& new FPDI();
+		// add a page 
+		$pdf->AddPage(); 
+		// set the sourcefile 
+		$pdf->setSourceFile('core/FPDI/coupon.pdf'); 
+		// import page 1 
+		$tplIdx = $pdf->importPage(1); 
+		// use the imported page as the template 
+		$pdf->useTemplate($tplIdx, 0, 0); 
+
+		// now write some text above the imported page 
+		$pdf->AddFont('Hanalei','','Hanalei-Regular.php');
+		$pdf->SetFont('Hanalei','','Hanalei-Regular.php'); 
+		$pdf->SetTextColor(255,0,0); 
+		$pdf->SetXY(40, 46.5);
+		$code = $general->generateRandomString(20);
+		$pdf->Write(0, $code); 
+
+		$users->add($name, $last, $email, $code, $subscribe);
+		$pdf->Output('newpdf.pdf', 'D'); 
 		header('Location: coupon.php?success');
 		exit();
 	}
@@ -48,7 +69,6 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
 // if form was successfully sent send a message to the user
 if ( isset($_GET['success']) && empty($_GET['success']) ) {
-	echo "<p class='success'>Thank you filling out the coupon fields. Please save the file and print it out.</p>";
 }
 ?>
 <!doctype html>
@@ -68,7 +88,8 @@ if ( isset($_GET['success']) && empty($_GET['success']) ) {
 		</ul>
 	</div>
 	<div class="main">
-		<h1>Enter in the fields for a coupon</h1>
+		<h1>Reframe Coupon</h1>
+		<p>Enter in the fields and click submit. Save the PDF and print out the coupon.</p>
 		<?php
 			if ( !empty($errors) || $resp->error) {
 				echo '<p class="error">' . implode('</p><p class="error">', $errors) . '</p>';
@@ -98,6 +119,10 @@ if ( isset($_GET['success']) && empty($_GET['success']) ) {
 						$publickey = '6Leuhu0SAAAAAEh6aLB7kU7kkmI0LvATAMe_sGsV';
 						echo recaptcha_get_html($publickey, $error_code);
 					?>
+				</li>
+				<li>
+					<input type="checkbox" name="subscribe" id="subscribe" value="1">
+					<label for="subscribe">I would like to receive your email newsletter</label>
 				</li>
 				<li>
 					<input type="submit" value="submit">
