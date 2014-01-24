@@ -73,6 +73,8 @@ if ( isset($_GET['success']) && empty($_GET['success']) ) {
 			if ( !empty($errors) || $resp->error) {
 				echo '<p class="error">' . implode('</p><p class="error">', $errors) . '</p>';
 				echo $error_code;
+			} elseif ( isset($_GET['success']) && empty($_GET['success']) )  {
+				echo "<p class='success'>Thank you filling out the coupon fields. Please save the file and print it out.</p>";
 			}
 		?>
 		<form action="" method="post">
