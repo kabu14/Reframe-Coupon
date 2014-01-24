@@ -26,3 +26,10 @@ ul li{
 	padding: 15px;
 	list-style: none;
 }
+
+.main {
+	width: 1000px;
+	padding: 25px;
+	background: #eee;
+	margin: 0 auto;
+}

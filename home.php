@@ -1,5 +1,6 @@
 <?php 
 require 'core/init.php';
+$general->logged_out_protect();
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,6 +17,10 @@ require 'core/init.php';
 			<li><a href="logout.php">Logout</a></li>
  
 		</ul>
+	</div>
+
+	<div class="main">
+		<p>Logged in!</p>
 	</div>
 </body>
 </html>
