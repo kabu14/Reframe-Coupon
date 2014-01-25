@@ -1,4 +1,8 @@
 <?php
+/**
+ * Author: Wayne Huang
+ * Description: The Users class allows the addition of user input information into the db. 
+ */
 class Users {
 	private $db;
 

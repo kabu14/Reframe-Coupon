@@ -1,4 +1,9 @@
 <?php
+/**
+ * Author: Wayne Huang
+ * Description: General class provides methods for restrictive access to certain pages and for creating a random
+ * string for coupon usage
+ */
 class General {
 	/**
 	 * Checks if the user is logged in

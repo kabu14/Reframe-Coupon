@@ -1,4 +1,8 @@
 <?php
+/**
+ * Author: Wayne Huang
+ * Description: The Admins class manages user login and validation
+ */
 class Admins {
 	private $db;
 
