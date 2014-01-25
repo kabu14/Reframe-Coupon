@@ -36,10 +36,15 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
 	// if there are no elements in the $errors array we are free to process the form
 	if ( empty($errors) === true ) {
-		$name = trim(htmlentities($_POST['name']));
-		$last = trim(htmlentities($_POST['last']));
+		$name = trim(htmlentities(ucfirst($_POST['name'])));
+		$last = trim(htmlentities(ucfirst($_POST['last'])));
 		$email = trim(htmlentities($_POST['email']));
-		$subscribe = htmlentities($_POST['subscribe']);
+		if ( isset($_POST['subscribe']) ) {
+			$subscribe = htmlentities($_POST['subscribe']);
+		}
+		else {
+			$subscribe = 0;
+		}
 		// Initiate FPDI
 		$pdf = new FPDI();
 		// add a page 
